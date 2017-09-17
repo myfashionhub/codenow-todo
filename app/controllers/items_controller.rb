@@ -11,14 +11,17 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @statuses = Item.statuses
   end
 
   def update
+    item = Item.find(params[:id])
+    item.update(item_params)
+    redirect_to "/items/#{item.id}"
   end
 
   def create
     Item.create(item_params)
-    puts "CREATING NEW ITEM #{item_params}"
     redirect_to '/items'
   end
 

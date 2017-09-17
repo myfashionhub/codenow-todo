@@ -1,7 +1,3 @@
-<h1 class="headline">
-  <span>Nessa's TODO list</span> <img src="/assets/pencil.png">
-</h1>
-
 <div class="new-item">
   <h3>Add new item</h3>
   <%= render "new" %>
@@ -14,7 +10,9 @@
   <% if @active_items.length > 0 %>
     <% @active_items.each do |item| %>
     <div class="item">
-      <p class="name"><%= item.name %><p>
+      <a class="name" href="/items/<%= item.id %>">
+        <%= item.name %>
+      </a>
       <p class="duration">
         Estimated time to complete: <%= item.duration %> hours<br/>
       </p>
@@ -33,7 +31,9 @@
   <% if @queued_items.length > 0 %>
     <% @queued_items.each do |item| %>
     <div class="item">
-      <p class="name"><%= item.name %></p>
+      <a class="name" href="/items/<%= item.id %>">
+        <%= item.name %>  
+      </a>
       <p class="duration">
         Estimated time to complete: <%= item.duration %> hours<br/>
       </p>
@@ -52,8 +52,12 @@
   <% if @done_items.length > 0 %>
     <% @done_items.each do |item| %>
       <div class="item">
-      <%= item.name %>
-      <%= display_date(item.completed_at) %>
+      <a class="name" href="/items/<%= item.id %>">
+        <%= item.name %>
+      </a>
+      <p class="deadline">
+        <%= display_date(item.completed_at) %>
+      </p>
       </div>
     <% end %>
   <% else %>

@@ -10,7 +10,7 @@
   </tr>
   <tr>
     <td><%= f.label :duration, "Estimated hours" %></td>
-    <td><%= f.number_field :duration %> </td>
+    <td><%= f.number_field :duration, step: 0.25 %> </td>
   </tr>
   <tr>
     <td><%= f.label :deadline, "Deadline" %></td>

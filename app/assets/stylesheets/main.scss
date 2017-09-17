@@ -8,8 +8,20 @@ div {
   box-sizing: border-box;
 }
 
+$link-blue: #0000ce;
+a,
+a:visited {
+  text-decoration: none;
+  color: $link-blue;
+}
+
 .headline {
+  margin: 15px auto;
+  display: block;
   text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: #000 !important;
 
   span {
     display: inline-block;
