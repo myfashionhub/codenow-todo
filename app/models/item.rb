@@ -1,4 +1,9 @@
 class Item < ActiveRecord::Base
-  validates :state,
-    inclusion: { in: ['queued', 'active', 'done'] }
+  def self.statuses
+    ['queued', 'active', 'done']
+  end
+
+  validates :name, presence: true
+  validates :status,
+    inclusion: { in: self.statuses }
 end

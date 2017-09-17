@@ -1,0 +1,31 @@
+<%= form_for @item do |f| %>
+<table class='new-item'>
+  <tr>
+    <td><%= f.label :name, "Name" %></td>
+    <td><%= f.text_field :name %> </td>
+  </tr>
+  <tr>
+    <td><%= f.label :description, "Description" %></td>
+    <td><%= f.text_field :description %> </td>
+  </tr>
+  <tr>
+    <td><%= f.label :duration, "Estimated hours" %></td>
+    <td><%= f.number_field :duration %> </td>
+  </tr>
+  <tr>
+    <td><%= f.label :deadline, "Deadline" %></td>
+    <td><%= f.date_field :deadline %> </td>
+  </tr>
+  <tr>
+    <td><%= f.label :status, "Status" %></td>
+    <td>
+      <%= f.select :status, @statuses, {} %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='2' class='save'>
+      <%= f.submit %>
+    </td>
+  </tr>
+</table>
+<% end %>
