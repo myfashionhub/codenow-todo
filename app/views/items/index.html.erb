@@ -1,35 +1,64 @@
-<h1>Nessa's TODO list</h1>
+<h1 class="headline">
+  <span>Nessa's TODO list</span> <img src="/assets/pencil.png">
+</h1>
 
-<h3>On-going tasks</h3>
-<% if @active_items.length > 0 %>
-  <% @active_items.each do |item| %>
-      <%= item.name %><br>
-      Estimated time to complete: <%= item.duration %><br/> hours
-      Due: <%= display_date(item.deadline) %>
+<div class="new-item">
+  <h3>Add new item</h3>
+  <%= render "new" %>
+</div>
+
+<div class="item-list">
+
+<div class="items-active">
+  <h3>On-going tasks</h3>
+  <% if @active_items.length > 0 %>
+    <% @active_items.each do |item| %>
+    <div class="item">
+      <p class="name"><%= item.name %><p>
+      <p class="duration">
+        Estimated time to complete: <%= item.duration %> hours<br/>
+      </p>
+      <p class="deadline">
+        Due: <%= display_date(item.deadline) %>
+      </p>
+    </div>
+    <% end %>
+  <% else %>
+    <p class="empty">No item in this list</p>
   <% end %>
-<% else %>
-  <p>No item in this list</p>
-<% end %>
+</div>
 
-<h3>Add new item</h3>
-<%= render "new" %>
-
-<h3>Backlog</h3>
-<% if @queued_items.length > 0 %>
-  <% @queued_items.each do |item| %>
-    <%= item.name %>
-    <%= display_date(item.deadline) %>
+<div class="items-queued">
+  <h3>Queue</h3>
+  <% if @queued_items.length > 0 %>
+    <% @queued_items.each do |item| %>
+    <div class="item">
+      <p class="name"><%= item.name %></p>
+      <p class="duration">
+        Estimated time to complete: <%= item.duration %> hours<br/>
+      </p>
+      <p class="deadline">
+        <%= display_date(item.deadline) %>
+      </p>
+    </div>
+    <% end %>
+  <% else %>
+    <p class="empty">No item in this list</p>
   <% end %>
-<% else %>
-  <p>No item in this list</p>
-<% end %>
+</div>
 
-<h3>Done</h3>
-<% if @active_items.length > 0 %>
-  <% @done_items.each do |item| %>
-    <%= item.name %>
-    <%= display_date(item.completed_at) %>
+<div class="items-done">
+  <h3>Done</h3>
+  <% if @done_items.length > 0 %>
+    <% @done_items.each do |item| %>
+      <div class="item">
+      <%= item.name %>
+      <%= display_date(item.completed_at) %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="empty">No item in this list</p>
   <% end %>
-<% else %>
-  <p>No item in this list</p>
-<% end %>
+</div>
+
+</div>

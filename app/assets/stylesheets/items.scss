@@ -1,0 +1,41 @@
+/* Item list */
+
+/* Positioning */
+.items-active,
+.items-queued {
+  width: 50%;
+  float: left;
+}
+
+.items-done {
+  clear: both;
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* Section styling */
+.items-active,
+.items-queued,
+.items-done {
+  padding: 10px 15px;
+
+  h3 {
+    text-align: center;
+  }
+
+  .empty {
+    text-align: center;
+  }
+
+  .item {
+    margin-bottom: 1em;
+
+    p {
+      margin: 5px 0 7px 0;
+    }
+
+    .name {
+      font-weight: bold;
+    }
+  }
+}
