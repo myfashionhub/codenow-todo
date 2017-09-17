@@ -13,7 +13,7 @@
   margin: 0 auto;
 }
 
-/* Section styling */
+/* Items section styling */
 .items-active,
 .items-queued,
 .items-done {
@@ -35,7 +35,63 @@
     }
 
     .name {
+      color: #e59400;
       font-weight: bold;
     }
+  }
+}
+
+/* Item form */
+.new-item {
+  h3 {
+    text-align: center;
+  }
+}
+
+.item-form {
+  width: 25em;
+  margin: 0 auto;
+
+  .row {
+    overflow: hidden; /* Clear floated children */
+    margin-bottom: .3em;
+    .column {
+      float: left;
+    }
+    .column:first-child {
+      width: 40%;
+    }
+    .column:last-child {
+      width: 60%;
+    }
+    .column.two {
+      width: 100%;
+    }
+  }
+
+  label {
+    width: 40%;
+    margin-right: .4em;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"] {
+    width: 100%;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+  }
+
+  input:focus {
+    outline: 0;
+  }
+
+  input[type="submit"] {
+    float: right;
+    font-size: 1.7em;
+    font-weight: bold;
   }
 }

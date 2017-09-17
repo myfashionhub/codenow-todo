@@ -1,0 +1,44 @@
+<%= form_for @item, html: {class: 'item-form'} do |f| %>
+  <div class="row">
+    <div class="column"><%= f.label :name, "Name" %></div>
+    <div class="column"><%= f.text_field :name %></div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <%= f.label :description, "Description" %>
+    </div>
+    <div class="column">
+      <%= f.text_field :description %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <%= f.label :duration, "Estimated hours" %>
+    </div>
+    <div class="column">
+      <%= f.number_field :duration, step: 0.25 %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <%= f.label :deadline, "Deadline" %>
+    </div>
+    <div class="column">
+      <%= f.date_field :deadline %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <%= f.label :status, "Status" %>
+    </div>
+    <div class="column">
+      <%= f.select :status, @statuses, {} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column two">
+      <%= f.submit %>
+    </div>
+  </div>
+</table>
+<% end %>
