@@ -7,11 +7,13 @@ class ItemsController < ApplicationController
     # New item form
     @item = Item.new(status: 'queued')
     @statuses = Item.statuses
+    @form_type = 'new'
   end
 
   def show
     @item = Item.find(params[:id])
     @statuses = Item.statuses
+    @form_type = 'edit'
   end
 
   def update
@@ -21,7 +23,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create(item_params)
+    item = Item.new(item_params)
+    item.save
     redirect_to '/items'
   end
 

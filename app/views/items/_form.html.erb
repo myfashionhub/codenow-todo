@@ -1,44 +1,38 @@
-<%= form_for @item, html: {class: 'item-form'} do |f| %>
-  <div class="row">
-    <div class="column"><%= f.label :name, "Name" %></div>
-    <div class="column"><%= f.text_field :name %></div>
-  </div>
-  <div class="row">
-    <div class="column">
-      <%= f.label :description, "Description" %>
-    </div>
-    <div class="column">
-      <%= f.text_field :description %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column">
-      <%= f.label :duration, "Estimated hours" %>
-    </div>
-    <div class="column">
-      <%= f.number_field :duration, step: 0.25 %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column">
-      <%= f.label :deadline, "Deadline" %>
-    </div>
-    <div class="column">
-      <%= f.date_field :deadline %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column">
-      <%= f.label :status, "Status" %>
-    </div>
-    <div class="column">
-      <%= f.select :status, @statuses, {} %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column two">
-      <%= f.submit %>
-    </div>
-  </div>
-</table>
+<% if @form_type == 'new' %>
+<form action="/items" method="POST"
+  class="item-form">
+<% else %>
+<form action="/items/<%= @item.id %>" method="POST"
+  class="item-form">
 <% end %>
+  <input type="hidden" name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+  </input>
+  <input type="text" placeholder="Name"
+    name="item[name]" value="<%= @item.name %>">
+  </input>
+  <input type="text" placeholder="Description"
+    name="item[description]" value="<%= @item.description %>">
+  </input>
+  <input type="number" placeholder="Estimated hours"
+    name="item[duration]" value="<%= @item.duration %>">
+  </input>
+  <input type="date" placeholder="Due date"
+    name="item[deadline]" value="<%= display_form_date(@item.deadline) %>">
+  </input>
+  <select name="item[status]">
+    <% @statuses.each do |status| %>
+    <option value="<%= status %>"
+      <%= 'selected' if @item.status == status %>>
+      <%= status %>
+    </option>
+    <% end %>
+  </select>
+
+  <% if @form_type == 'new' %>
+  <input type="submit" value="Create item"/>
+  <% else %>
+  <input type="submit" value="Update item"/>
+  <% end %>
+  </input>
+</form>
