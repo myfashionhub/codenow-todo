@@ -18,7 +18,13 @@ class ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:id])
-    item.update(item_params)
+
+    item.assign_attributes(item_params)
+    if item.status == 'done'
+      item.completed_at = Time.now
+    end
+    item.save
+
     redirect_to "/items/#{item.id}"
   end
 
