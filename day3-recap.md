@@ -80,6 +80,33 @@ $ touch app/views/todos/index.html.erb
 ```
 - `<%= stylesheet_link_tag 'application', media: 'all' %>` generates a <link> element that links all your stylesheets to the HTML page. This is why you don't have to manually link the stylesheets like in your frontend app (quite convenient).
 
+## What is `params`
+- Params contains data that your application receives in a request. The app makes `params` available everywhere, so it is accessible in your view even though it isn't an instance variable.
+
+```html
+<!-- show.html.erb -->
+<h1><%= params[:id] %></h1>
+```
+
+- `params` is a hash and you can access the values of its keys like any hash (see hash below).
+
+- `:id` is available in params hash because we have designated it as a param in the route. (Note `todos` isn't a parameter.)
+```ruby
+get '/todos/:id' => 'todos#show'
+```
+
+- We can pass other parameters to the app by writing them in the query string:
+```
+http://todo-app-username.c9users.io/todos/1?key1=value1&key2=value2
+http://todo-app-username.c9users.io/todos?code=secret&word=sauce
+```
+Everything after `?` is part of the query string. In this case, `key1` and `key2` are names of the keys, and their values are `value1`, `value2`. Key - value pairs are separated by `&`.
+
+- The values rendered in the HTML should change every time you change the value of the code & word keys.
+```html
+Code word <%= params[:code] params[:word] %>
+```
+
 ## ERB (Embeded Ruby)
 - The index.html.erb contains HTML code where you can also render variables and logic.
 - To make a variable in your controller available in the view, you must declare it as an instance variable (with the @ symbol).
@@ -111,7 +138,6 @@ $ touch app/views/todos/index.html.erb
 ```html
 <!-- Frontend app -->
 <a href="show.html">My todo item</a>
-
 
 <!-- Rails app -->
 <a href="/todos/1">My todo item</a>
@@ -146,7 +172,7 @@ Note that the `end` keyword should line up with the opening keyword. Lines insid
 @code_word = "#{params[:code]} #{params[:word]}"
 ```
 
-- Declare a hash: Hash is a type of object in Ruby that contains keys and values.
+- Hash is a type of object in Ruby that contains keys and values.
 ```
 a_hash = {
     key1: 'Value 1', # Note: no space between key1 and :
