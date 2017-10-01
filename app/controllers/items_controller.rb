@@ -34,6 +34,11 @@ class ItemsController < ApplicationController
     redirect_to '/items'
   end
 
+  def destroy
+    Item.find(params[:id]).destroy
+    redirect_to '/'
+  end
+
   def item_params
     params.require(:item).permit(
       :name, :description, :duration, :deadline, :status, :completed_at
