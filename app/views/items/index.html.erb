@@ -20,6 +20,11 @@
         Due: <%= display_date(item.deadline) %>
       </p>
     </div>
+
+    <form action="/items/<%= item.id  %>/delete" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="submit" value="Delete"/>
+    </form>
     <% end %>
   <% else %>
     <p class="empty">No item in this list</p>
