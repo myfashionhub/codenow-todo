@@ -2,6 +2,15 @@
 
 On day three of the workshop, we learned how to render a new view in a Rails application.
 
+## Quiz
+- What is Ruby? Rails?
+- How do you run the Rails application?
+- How do you define a route in the Rails app?
+- What is a controller/action?
+- How do you render a view in Rails?
+- Why do you use an instance variable?
+- What is the file extension erb?
+
 ## Set up Rails app
 - When you create a new Ruby on Rails workspace in Cloud9, it automatically generates a Rails app for you. But if you were to start from scratch, use the following command:
 
@@ -9,7 +18,7 @@ On day three of the workshop, we learned how to render a new view in a Rails app
 $ rails new todo-app
 ```
 
-- Initialize a git repository, and add Github repo as a remote.
+- Initialize a git repository, and add Github repo as a remote. (Copy the git URL from the SSH tab in your Github repo.)
 ```bash
 $ git init
 $ git remote add origin git@github.com:username/repo-name.git
@@ -29,7 +38,7 @@ We rely on Rails' helpful errors to know what the next step is. First we simply 
 # The text on the right is how you would navigate to each route while opening your app in the browser
 
 root 'todos#index'              # /
-get 'todos#index'               # /todos
+get 'todos' => 'todos#index'    # /todos
 get 'todos/:id' => 'todos#show' # /todos/2
 ```
 
@@ -113,12 +122,11 @@ Code word <%= params[:code] params[:word] %>
 
 ```ruby
     def show
-        id = params[:id]
-
+        @id = params[:id]
+        # @todo is a hash
         @todo = {
-            id: id,
             name: 'My task',
-            description: '',
+            description: 'A longer description of the task',
         }
     end
 ```
@@ -151,16 +159,19 @@ Code word <%= params[:code] params[:word] %>
 class TodosController
     # This is a code block inside the class declaration
 
-    def index
+    def show
         # This is a code block inside method declaration
 
         if params[:id] == '1'
             # This is a code block inside the if conditional
-            @todo = {name: 'Todo 1'}
+            @todo = {name: 'Todo 1', description: 'Task 1'}
         elsif params[:id] == '2'
-            @todo = {name: 'Todo 2'}
+            @todo = {name: 'Todo 2', description: 'Task 2'}
         else
-            @todo = {}
+            @todo = {
+                name: 'Everything else',
+                description: 'Generic description',
+            }
         end
     end
 end
@@ -173,7 +184,7 @@ Note that the `end` keyword should line up with the opening keyword. Lines insid
 ```
 
 - Hash is a type of object in Ruby that contains keys and values.
-```
+```ruby
 a_hash = {
     key1: 'Value 1', # Note: no space between key1 and :
     key2: 'Value 2',
@@ -181,7 +192,7 @@ a_hash = {
 }
 ```
 To access the value of a key, you'd write:
-```
+```ruby
 a_hash[:key1]
 ```
 In this case `:key1` is called a symbol. Similar to variables, symbols are also snake_case.
